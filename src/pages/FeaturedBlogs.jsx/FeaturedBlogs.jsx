@@ -105,7 +105,6 @@ const FeaturedBlogs = () => {
                 </motion.div>
             </div>
 
-            {/* Table rendering */}
             <motion.div
                 initial={{ opacity: 0, y: -30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -113,7 +112,6 @@ const FeaturedBlogs = () => {
                 className="overflow-x-auto">
                 <table className="table md:table-lg border w-[50rem] sm:w-full">
 
-                    {/* Table Header */}
                     <thead>
                         {table.getHeaderGroups().map((headerGroup) => (
                             <tr key={headerGroup.id}>
@@ -131,7 +129,6 @@ const FeaturedBlogs = () => {
                         ))}
                     </thead>
 
-                    {/* Table Body */}
                     <tbody>
                         {table.getRowModel().rows.map((row) => (
                             <tr className="hover:bg-blue-500/15" key={row.id}>
