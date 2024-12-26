@@ -1,7 +1,7 @@
 
 # TechSphere
 
-**TechSphere** is an IT/Tech-related blogging website designed to deliver a seamless and engaging user experience for tech enthusiasts. Built with modern web technologies, it enables users to explore, post, and interact with blogs in a visually appealing and highly functional 
+**TechSphere** is an IT/Tech-related blogging website designed to deliver a seamless and engaging user experience for tech enthusiasts. Built with modern web technologies, it enables users to explore, post, and interact with blogs in a visually appealing and highly functional environment.
 
 ## Live Demo
 
