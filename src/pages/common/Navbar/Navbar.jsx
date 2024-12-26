@@ -141,7 +141,7 @@ const Navbar = () => {
                 <div className="flex lg:hidden items-center gap-1 sm:gap-3">
                     {/* Avatar */}
                     {(user && currentUser &&
-                        <div className="dropdown dropdown-end hidden min-[375px]:block lg:hidden">
+                        <div className="dropdown dropdown-end lg:hidden">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-8 rounded-full">
                                     <img
