@@ -5,6 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingPage from "../common/LoadingPage/LoadingPage";
 import axios from "axios";
+import { format } from "date-fns";
 
 const BlogDetails = () => {
     const { id } = useParams();
@@ -18,14 +19,15 @@ const BlogDetails = () => {
     const [newComment, setNewComment] = useState("");
     const [currentUser, setCurrentUser] = useState({});
 
+    
     useEffect(() => {
         axiosSecure.get(`/users/${user.email}`)
-            .then((response) => setCurrentUser(response.data));
-
+        .then((response) => setCurrentUser(response.data));
+        
         axios.get(`https://tech-sphere-server.vercel.app/blogs/${id}`).then((response) => {
             setBlog(response.data);
         });
-
+        
         axios.get(`https://tech-sphere-server.vercel.app/comments/${id}`).then((response) => {
             setComments(response.data);
         });
@@ -54,6 +56,8 @@ const BlogDetails = () => {
 
     if (!blog) return <LoadingPage></LoadingPage>;
 
+    const formattedDate = format(new Date(blog?.date), "MMMM dd, yyyy");
+
     return (
         <motion.div
             className="w-[90%] lg:w-[70%] mx-auto my-10 sm:my-14 md:my-16 lg:my-20"
@@ -65,7 +69,7 @@ const BlogDetails = () => {
             <div className="flex items-center">
                 <div>
                     <p className="text-base sm:text-lg xl:text-xl text-gray-700 font-semibold">{blog.name}</p>
-                    <p className="text-sm text-gray-600">{blog.date}</p>
+                    <p className="text-sm text-gray-600">{formattedDate}</p>
                 </div>
             </div>
             <img
