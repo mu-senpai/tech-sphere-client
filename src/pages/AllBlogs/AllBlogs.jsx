@@ -105,12 +105,6 @@ const AllBlogs = () => {
                 {blogs.map((blog) => (
                     <BlogCard key={blog._id} blog={blog} />
                 ))}
-
-                {/* {blogs.length === 0 && (
-                    <div className="h-[60rem] text-center text-gray-500">
-                        No blogs found matching your criteria.
-                    </div>
-                )} */}
             </div>
         </section>
     );
