@@ -89,7 +89,7 @@
    npm start
    ```
 
-5. Navigate to `http://localhost:3000` in your browser.
+5. Navigate to `http://localhost:5000` in your browser.
 
 ## Deployment Instructions
 - Ensure all environment variables are set correctly in production.
