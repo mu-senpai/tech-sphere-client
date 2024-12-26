@@ -22,11 +22,11 @@ const BlogDetails = () => {
         axiosSecure.get(`/users/${user.email}`)
             .then((response) => setCurrentUser(response.data));
 
-        axios.get(`http://localhost:5000/blogs/${id}`).then((response) => {
+        axios.get(`https://tech-sphere-server.vercel.app/blogs/${id}`).then((response) => {
             setBlog(response.data);
         });
 
-        axios.get(`http://localhost:5000/comments/${id}`).then((response) => {
+        axios.get(`https://tech-sphere-server.vercel.app/comments/${id}`).then((response) => {
             setComments(response.data);
         });
     }, [id, user, axiosSecure]);

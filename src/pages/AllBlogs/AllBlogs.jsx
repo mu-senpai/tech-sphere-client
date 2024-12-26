@@ -23,7 +23,7 @@ const AllBlogs = () => {
             if (searchQuery) params.search = searchQuery;
 
             const queryString = new URLSearchParams(params).toString();
-            const url = `http://localhost:5000/blogs${queryString ? `?${queryString}` : ''}`;
+            const url = `https://tech-sphere-server.vercel.app/blogs${queryString ? `?${queryString}` : ''}`;
 
             const response = await axios.get(url);
             setBlogs(response.data);

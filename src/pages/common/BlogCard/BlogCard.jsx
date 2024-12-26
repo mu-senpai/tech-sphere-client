@@ -24,7 +24,7 @@ const BlogCard = (props = {}) => {
             axiosSecure.get(`/users/${user.email}`)
                 .then(data => setCurrentUser(data.data));
 
-            axios.get('http://localhost:5000/wishlist')
+            axios.get('https://tech-sphere-server.vercel.app/wishlist')
                 .then(data => {
                     const listedItem = data.data.find(item => ((item.email === user.email) && (item.title === blog.title)));
                     if (listedItem) {

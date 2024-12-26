@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import axios from "axios";
 
 const Navbar = () => {
 
@@ -11,14 +11,13 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState({});
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
         if (user) {
-            axiosSecure.get(`/users/${user.email}`)
+            axios.get(`https://tech-sphere-server.vercel.app/users/public/${user.email}`, { withCredentials: true })
             .then(data => setCurrentUser(data.data));
         }
-    }, [user, axiosSecure])
+    }, [user])
 
     const handleLogout = () => {
         logOutUser()

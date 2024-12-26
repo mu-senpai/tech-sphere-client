@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../providers/AuthProvider";
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://tech-sphere-server.vercel.app',
     withCredentials: true
 })
 

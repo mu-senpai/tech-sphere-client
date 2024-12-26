@@ -93,7 +93,7 @@ const Register = () => {
     }
 
     return (
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-8 sm:gap-0 sm:justify-between py-10 sm:py-16 lg:py-20 2xl:py-28">
+        <div className="min-h-screen 2xl:min-h-[60rem] flex flex-col-reverse lg:flex-row items-center gap-8 sm:gap-0 justify-center sm:justify-between py-10 sm:py-16 lg:py-20 2xl:py-28">
 
             <div className="hidden xl:flex xl:w-[25%]"></div>
 

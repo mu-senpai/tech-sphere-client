@@ -11,7 +11,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Login = () => {
 
-    const { logInUser, loginWithGoogle } = useContext(AuthContext);
+    const { logInUser, loginWithGoogle} = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
@@ -19,10 +19,8 @@ const Login = () => {
     const handleLogin = (event) => {
         event.preventDefault();
 
-        // Collect form data using FormData API
         const formData = new FormData(event.target);
 
-        // Convert formData to an object
         const data = Object.fromEntries(formData.entries());
 
         const { email, password } = data;
@@ -38,7 +36,7 @@ const Login = () => {
 
         logInUser(email, password)
             .then(() => {
-                navigate(location.state || '/');
+                navigate(location?.state ? location.state : '/');
             })
             .catch(error => {
                 toast.error(error.code);
@@ -71,7 +69,7 @@ const Login = () => {
     }
 
     return (
-        <div className="min-h-screen 2xl:min-h-[60rem] flex flex-col-reverse lg:flex-row items-center gap-8 sm:gap-0 sm:justify-between py-10 sm:py-16 lg:py-20 2xl:py-28">
+        <div className="min-h-screen 2xl:min-h-[60rem] flex flex-col-reverse lg:flex-row items-center justify-center gap-8 sm:gap-0 sm:justify-between py-10 sm:py-16 lg:py-20 2xl:py-28">
 
             <div className="hidden xl:flex xl:w-[25%]"></div>
 
@@ -120,6 +118,7 @@ const Login = () => {
                     </Link>
                 </p>
             </motion.div>
+            
             <div className="hidden lg:w-[55%] xl:w-[25%] lg:flex flex-col items-center justify-center">
                 <Lottie animationData={loginLottieData} loop={true}></Lottie>
             </div>

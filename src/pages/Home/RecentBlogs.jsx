@@ -9,7 +9,7 @@ const RecentBlogs = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/recent-blogs");
+        const response = await axios.get("https://tech-sphere-server.vercel.app/recent-blogs");
         setBlogs(response.data);
       } catch (error) {
         console.error("Failed to fetch recent blogs:", error);

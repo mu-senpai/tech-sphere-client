@@ -36,7 +36,7 @@ const UpdateBlog = () => {
 
         if (id) {
             axios
-                .get(`http://localhost:5000/blogs/${id}`)
+                .get(`https://tech-sphere-server.vercel.app/blogs/${id}`)
                 .then((response) => setBlogData(response.data))
                 .catch((error) => toast.error(error.code));
         }

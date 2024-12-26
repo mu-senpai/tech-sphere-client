@@ -7,42 +7,42 @@ const Testimonials = [
         role: "Full-Stack Developer at CodeHub",
         message:
             "TechSphere provides invaluable insights into the latest technologies and trends. It's my go-to platform for staying updated in the IT world!",
-        img: "https://i.ibb.co.com/XCbshWL/image.png",
+        img: "https://i.ibb.co.com/S7Hg1J6/male-1.jpg",
     },
     {
         name: "Jane Smith",
         role: "Data Scientist at AI Labs",
         message:
             "The articles on TechSphere are well-researched and incredibly insightful. I’ve learned so much about AI and machine learning here.",
-        img: "https://i.ibb.co.com/wBgJdn6/image.png",
+        img: "https://i.ibb.co.com/C6JF033/female-1.jpg",
     },
     {
         name: "Mike Johnson",
         role: "Cloud Engineer at CloudTech",
         message:
             "TechSphere helped me get started with Kubernetes and cloud architecture. A must-read for anyone in tech!",
-        img: "https://i.ibb.co.com/Wzx847Q/image.png",
+        img: "https://i.ibb.co.com/GvmYg5g/male-2.jpg",
     },
     {
         name: "Emily Davis",
         role: "UI/UX Designer at CreativeEdge",
         message:
             "TechSphere's design blogs have revolutionized the way I approach user interfaces. The tips and tools shared are top-notch!",
-        img: "https://i.ibb.co.com/bgQ2gk7/image.png",
+        img: "https://i.ibb.co.com/S3kgHz7/female-2.jpg",
     },
     {
         name: "Chris Lee",
         role: "Cybersecurity Analyst at SecureNet",
         message:
             "I love the cybersecurity section on TechSphere. It keeps me informed about the latest vulnerabilities and protection methods.",
-        img: "https://i.ibb.co.com/L0ymxMV/image.png",
+        img: "https://i.ibb.co.com/2gvS0z5/male-3.jpg",
     },
     {
         name: "Sophia Brown",
         role: "DevOps Engineer at BuildOps",
         message:
             "TechSphere has been instrumental in improving my CI/CD pipelines. The tutorials and articles are very practical.",
-        img: "https://i.ibb.co.com/FWxGTzb/image.png",
+        img: "https://i.ibb.co.com/c3HLpRs/female-3.jpg",
     },
 ];
 
@@ -88,7 +88,7 @@ export default function TestimonialsCarousel() {
                         transition={{ duration: 0.5 }}
                         className="flex justify-center items-center"
                     >
-                        <div className="flex flex-col h-60 items-center justify-center text-center bg-white p-6">
+                        <div className="flex flex-col h-80 items-center justify-center text-center bg-white p-6">
                             <img
                                 src={Testimonials[currentIndex].img}
                                 alt={Testimonials[currentIndex].name}

@@ -15,7 +15,7 @@ const FeaturedBlogs = () => {
     useEffect(() => {
         setDataLoading(true);
         axios
-            .get("http://localhost:5000/featured-blogs")
+            .get("https://tech-sphere-server.vercel.app/featured-blogs")
             .then((response) => setBlogs(response.data))
             .catch((error) => toast.error("Error fetching blogs:", error));
         setDataLoading(false);
