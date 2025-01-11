@@ -17,17 +17,13 @@ const BlogDetails = () => {
     const [blog, setBlog] = useState(null);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
-    const [currentUser, setCurrentUser] = useState({});
 
-    
+
     useEffect(() => {
-        axiosSecure.get(`/users/${user.email}`)
-        .then((response) => setCurrentUser(response.data));
-        
         axios.get(`https://tech-sphere-server.vercel.app/blogs/${id}`).then((response) => {
             setBlog(response.data);
         });
-        
+
         axios.get(`https://tech-sphere-server.vercel.app/comments/${id}`).then((response) => {
             setComments(response.data);
         });
@@ -40,8 +36,8 @@ const BlogDetails = () => {
             .post(`/comments`, {
                 blogId: id,
                 text: newComment,
-                userName: currentUser.name,
-                userProfilePic: currentUser.photo,
+                userName: user.displayName,
+                userProfilePic: user.photoURL,
             })
             .then((response) => {
                 console.log(response.data);
@@ -77,9 +73,16 @@ const BlogDetails = () => {
                 alt={blog.title}
                 className="w-full h-[20rem] sm:h-[25rem] xl:h-[35rem] object-cover rounded-md my-8 sm:my-10"
             />
-            <p className="text-sm sm:text-base xl:text-lg my-8 sm:my-10 text-gray-600">{blog.longDescription}</p>
+            {/* <p className="text-sm sm:text-base xl:text-lg my-8 sm:my-10 text-gray-600">{blog.longDescription}</p> */}
+            <p className="text-sm sm:text-base xl:text-lg my-8 sm:my-10 text-gray-600">
+                {blog.longDescription.map((paragraph, index) => (
+                    <p key={index} style={{ marginBottom: '1rem' }}>
+                        {paragraph}
+                    </p>
+                ))}
+            </p>
 
-            {currentUser.email === blog.email ? (
+            {user.email === blog.email ? (
                 <Link to={`/update-blog/${blog._id}`}
                     onClick={handleUpdateBlog}
                     className="btn border-none bg-gradient-to-r from-blue-400 to-[#3b82f6] hover:from-blue-600 hover:to-[#3b82f6] text-white mb-4"

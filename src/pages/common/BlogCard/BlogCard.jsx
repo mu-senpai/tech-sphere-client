@@ -14,16 +14,12 @@ const BlogCard = (props = {}) => {
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
-    const [currentUser, setCurrentUser] = useState({});
     const [isWishlisted, setIsWishisted] = useState(false);
 
     const formattedDate = format(new Date(blog.date), "MMM dd, yyyy");
 
     useEffect(() => {
         if (user) {
-            axiosSecure.get(`/users/${user.email}`)
-                .then(data => setCurrentUser(data.data));
-
             axios.get('https://tech-sphere-server.vercel.app/wishlist')
                 .then(data => {
                     const listedItem = data.data.find(item => ((item.email === user.email) && (item.title === blog.title)));
@@ -32,7 +28,7 @@ const BlogCard = (props = {}) => {
                     }
                 })
         }
-    }, [user, axiosSecure, blog])
+    }, [user, blog])
 
     const handleWishlist = () => {
         if (!user) {
@@ -40,8 +36,19 @@ const BlogCard = (props = {}) => {
         }
 
         if (user) {
+
+            if (user.email === blog.email) {
+                toast.error(`You can't add your own blog in your wishlist.`);
+                return;
+            }
+
+            if (isWishlisted) {
+                toast.error(`This blog is already in your wishlist.`);
+                return;
+            }
+
             const wishListItem = {
-                email: currentUser.email,
+                email: user.email,
                 blogId: blog._id,
                 title: blog.title,
                 category: blog.category
@@ -72,41 +79,41 @@ const BlogCard = (props = {}) => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
         >
-            <div className="flex flex-col md:flex-row gap-6">
+            <div className="flex flex-col md:flex-row gap-6 sm:gap-5 md:gap-6">
 
                 <figure className="flex-shrink-0">
                     <img
                         src={blog.imageUrl || "https://via.placeholder.com/300"}
                         alt="Blog Thumbnail"
-                        className="rounded-lg object-cover object-center w-full md:w-60 lg:w-72 h-72 sm:h-96 md:h-full"
+                        className="rounded-lg object-cover object-center w-full md:w-60 lg:w-72 h-72 sm:h-60 md:h-full"
                     />
                 </figure>
 
-                <div className="flex flex-col gap-3 flex-grow">
+                <div className="h-auto sm:h-[14.5rem] md:h-auto flex flex-col justify-between gap-3 flex-grow">
                     <div className="mb-2">
                         <span className="badge lg:badge-lg bg-blue-500 text-xs lg:text-sm font-bold text-white px-4 py-2 uppercase">
                             {blog.category}
                         </span>
                     </div>
 
-                    <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800">
+                    <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 sm:flex-grow md:flex-grow-0">
                         {blog.title}
                     </h2>
 
-                    <p className="text-sm md:text-base lg:text-lg text-gray-600 my-3 line-clamp-3 flex-grow">
+                    <p className="text-sm md:text-base lg:text-lg text-gray-600 my-3 sm:my-1 md:my-3 line-clamp-3 flex-grow">
                         {blog.shortDescription}
                     </p>
 
                     <div className="mt-4 flex flex-row justify-between items-center sm:items-center gap-4">
-                        <div className="text-sm md:text-base text-gray-500">
+                        <div className="text-sm sm:text-xs md:text-base text-gray-500">
                             <span>{formattedDate}</span>
                         </div>
 
                         <div className="flex gap-3">
-                            <Link to={`/blog/${blog._id}`} className="btn btn-sm lg:btn-md border-none bg-gradient-to-r from-blue-400 to-[#3b82f6] hover:from-blue-600 hover:to-[#3b82f6] text-white rounded-md">
+                            <Link to={`/blog/${blog._id}`} className="btn btn-sm sm:btn-xs md:btn-sm lg:btn-md border-none bg-gradient-to-r from-blue-400 to-[#3b82f6] hover:from-blue-600 hover:to-[#3b82f6] text-white rounded-md">
                                 Details
                             </Link>
-                            <button onClick={handleWishlist} className={`${isWishlisted ? 'btn-disabled' : ''} btn btn-ghost border border-gray-600 hover:bg-blue-500 hover:text-white hover:border-none btn-sm lg:btn-md rounded-md`}>
+                            <button onClick={handleWishlist} className={`btn btn-ghost border border-gray-600 hover:bg-blue-500 hover:text-white hover:border-blue-500 btn-sm sm:btn-xs md:btn-sm lg:btn-md rounded-md`}>
                                 Wishlist
                             </button>
                         </div>

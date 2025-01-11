@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { createContext, useEffect, useState } from 'react';
 import auth from '../firebase/firebase.config';
 import axios from 'axios';
@@ -42,6 +42,13 @@ const AuthProvider = (props = {}) => {
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
+    const setNamePhotoToUserProfile = (name, photo) => {
+        setLoading(true);
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+        })
+    }
+
     const logInUser = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
@@ -70,6 +77,7 @@ const AuthProvider = (props = {}) => {
         dataLoading,
         setDataLoading,
         createUser,
+        setNamePhotoToUserProfile,
         logInUser,
         logOutUser,
         loginWithGoogle,

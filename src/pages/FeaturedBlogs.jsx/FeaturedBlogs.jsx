@@ -26,7 +26,10 @@ const FeaturedBlogs = () => {
             blogs.map((blog) => ({
                 ...blog,
                 wordCount: blog.longDescription
-                    ? blog.longDescription.trim().split(/\s+/).length
+                    ? blog.longDescription.reduce(
+                        (total, paragraph) => total + paragraph.trim().split(/\s+/).length,
+                        0
+                    )
                     : 0,
             })),
         [blogs]
@@ -110,7 +113,7 @@ const FeaturedBlogs = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className="overflow-x-auto">
-                <table className="table md:table-lg border w-[50rem] sm:w-full">
+                <table className="table md:table-lg border w-[55rem] sm:w-full">
 
                     <thead>
                         {table.getHeaderGroups().map((headerGroup) => (
@@ -131,13 +134,17 @@ const FeaturedBlogs = () => {
 
                     <tbody>
                         {table.getRowModel().rows.map((row) => (
-                            <tr className="hover:bg-blue-500/15" key={row.id}>
+                            <motion.tr
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.4 ,duration: 0.6, ease: "easeOut" }}
+                                className="hover:bg-blue-500/15" key={row.id}>
                                 {row.getVisibleCells().map((cell) => (
                                     <td key={cell.id}>
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </td>
                                 ))}
-                            </tr>
+                            </motion.tr>
                         ))}
                     </tbody>
                 </table>

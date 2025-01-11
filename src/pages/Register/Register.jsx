@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 
 const Register = () => {
 
-    const { createUser, loginWithGoogle } = useContext(AuthContext);
+    const { createUser, loginWithGoogle, setNamePhotoToUserProfile, setLoading, setUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
 
@@ -38,31 +38,43 @@ const Register = () => {
         }
 
         createUser(email, password)
-            .then(result => {
+            .then((result) => {
+                setUser(result.user);
+
                 const createdAt = result.user?.metadata?.creationTime;
                 const uid = result.user?.uid;
                 const newUser = { name, email, photo, createdAt, uid };
 
                 axiosSecure.post('/users', newUser)
                     .then(data => {
-                        console.log(data.data);
+
                         if (data.data.insertedId) {
-                            Swal.fire({
-                                title: 'Success!',
-                                text: 'You have successfully registered!',
-                                icon: 'success',
-                                confirmButtonText: 'Close'
-                            }).then(() => {
-                                navigate('/');
-                            });
+                            setNamePhotoToUserProfile(name, photo)
+                                .then(() => {
+                                    Swal.fire({
+                                        title: 'Success!',
+                                        text: 'You have successfully registered!',
+                                        icon: 'success',
+                                        confirmButtonText: 'Close'
+                                    }).then(() => {
+                                        navigate('/');
+                                    });
+                                })
+                                .catch((error) => {
+                                    setLoading(false);
+                                    toast.error(error.code);
+                                });
                         }
+
                         formData.reset();
                     })
                     .catch(error => {
+                        setLoading(false);
                         toast.error(error.code);
                     })
             })
             .catch(error => {
+                setLoading(false);
                 toast.error(error.code);
             })
     };
@@ -84,10 +96,12 @@ const Register = () => {
                         }
                     })
                     .catch(error => {
+                        setLoading(false);
                         toast.error(error.code);
                     })
             })
             .catch(error => {
+                setLoading(false);
                 toast.error(error.code);
             })
     }

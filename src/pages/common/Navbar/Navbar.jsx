@@ -1,23 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
-import axios from "axios";
 
 const Navbar = () => {
 
     const { user, logOutUser } = useContext(AuthContext);
 
     const navigate = useNavigate();
-    const [currentUser, setCurrentUser] = useState({});
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    useEffect(() => {
-        if (user) {
-            axios.get(`https://tech-sphere-server.vercel.app/users/public/${user.email}`, { withCredentials: true })
-            .then(data => setCurrentUser(data.data));
-        }
-    }, [user])
 
     const handleLogout = () => {
         logOutUser()
@@ -38,31 +29,6 @@ const Navbar = () => {
 
     const NavigationList = (
         <>
-            <li>
-                <NavLink to={`/`} onClick={() => setIsMenuOpen(false)} className={({ isActive }) => `${isActive && 'text-[#3b82f6]'} hover:text-[#3b82f6]`}>
-                    Home
-                </NavLink>
-            </li>
-            <li>
-                <NavLink to={`/add-blog`} onClick={() => setIsMenuOpen(false)} className={({ isActive }) => `${isActive && 'text-[#3b82f6]'} hover:text-[#3b82f6]`}>
-                    Add Blog
-                </NavLink>
-            </li>
-            <li>
-                <NavLink to={`/all-blogs`} onClick={() => setIsMenuOpen(false)} className={({ isActive }) => `${isActive && 'text-[#3b82f6]'} hover:text-[#3b82f6]`}>
-                    All Blogs
-                </NavLink>
-            </li>
-            <li>
-                <NavLink to={`/featured-blogs`} onClick={() => setIsMenuOpen(false)} className={({ isActive }) => `${isActive && 'text-[#3b82f6]'} hover:text-[#3b82f6]`}>
-                    Featured Blogs
-                </NavLink>
-            </li>
-            <li>
-                <NavLink to={`/wishlist`} onClick={() => setIsMenuOpen(false)} className={({ isActive }) => `${isActive && 'text-[#3b82f6]'} hover:text-[#3b82f6]`}>
-                    Wishlist
-                </NavLink>
-            </li>
             {!user ? (
                 <>
                     <li>
@@ -85,17 +51,44 @@ const Navbar = () => {
                     </li>
                 </>
             ) : (
-                <li>
-                    <button
-                        onClick={() => {
-                            handleLogout();
-                            setIsMenuOpen(false);
-                        }}
-                        className="font-bold text-[#3b82f6] hover:text-blue-600 lg:btn lg:btn-sm lg:border-none lg:bg-gradient-to-r lg:from-blue-400 lg:to-[#3b82f6] lg:hover:from-blue-600 lg:hover:to-[#3b82f6] lg:text-white lg:hover:text-white"
-                    >
-                        Log Out
-                    </button>
-                </li>
+                <>
+                    <li>
+                        <NavLink to={`/`} onClick={() => setIsMenuOpen(false)} className={({ isActive }) => `${isActive && 'text-[#3b82f6]'} hover:text-[#3b82f6]`}>
+                            Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={`/add-blog`} onClick={() => setIsMenuOpen(false)} className={({ isActive }) => `${isActive && 'text-[#3b82f6]'} hover:text-[#3b82f6]`}>
+                            Add Blog
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={`/all-blogs`} onClick={() => setIsMenuOpen(false)} className={({ isActive }) => `${isActive && 'text-[#3b82f6]'} hover:text-[#3b82f6]`}>
+                            All Blogs
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={`/featured-blogs`} onClick={() => setIsMenuOpen(false)} className={({ isActive }) => `${isActive && 'text-[#3b82f6]'} hover:text-[#3b82f6]`}>
+                            Featured Blogs
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={`/wishlist`} onClick={() => setIsMenuOpen(false)} className={({ isActive }) => `${isActive && 'text-[#3b82f6]'} hover:text-[#3b82f6]`}>
+                            Wishlist
+                        </NavLink>
+                    </li>
+                    <li>
+                        <button
+                            onClick={() => {
+                                handleLogout();
+                                setIsMenuOpen(false);
+                            }}
+                            className="font-bold text-[#3b82f6] hover:text-blue-600 lg:btn lg:btn-sm lg:border-none lg:bg-gradient-to-r lg:from-blue-400 lg:to-[#3b82f6] lg:hover:from-blue-600 lg:hover:to-[#3b82f6] lg:text-white lg:hover:text-white"
+                        >
+                            Log Out
+                        </button>
+                    </li>
+                </>
             )}
         </>
     );
@@ -119,20 +112,20 @@ const Navbar = () => {
 
                     {NavigationList}
 
-                    {(user && currentUser &&
+                    {(user &&
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
                                     <img
-                                        alt={currentUser.name}
-                                        src={currentUser.photo} />
+                                        alt={user.displayName}
+                                        src={user.photoURL} />
                                 </div>
                             </div>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-[10px] z-[1] mt-3 w-auto p-3 shadow">
-                                <p>User Name: {currentUser.name}</p>
-                                <p>Email: {currentUser.email}</p>
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-[10px] z-[1] mt-3 w-72 p-3 shadow">
+                                <p>User Name: {user.displayName}</p>
+                                <p>Email: {user.email}</p>
                             </ul>
                         </div>
                     )}
@@ -140,20 +133,20 @@ const Navbar = () => {
 
                 <div className="flex lg:hidden items-center gap-1 sm:gap-3">
                     {/* Avatar */}
-                    {(user && currentUser &&
+                    {(user &&
                         <div className="dropdown dropdown-end lg:hidden">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-8 rounded-full">
                                     <img
-                                        alt={currentUser.name}
-                                        src={currentUser.photo} />
+                                        alt={user.displayName}
+                                        src={user.photoURL} />
                                 </div>
                             </div>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-[10px] z-[1] mt-3 w-auto p-3 shadow">
-                                <p>User Name: {currentUser.name}</p>
-                                <p>Email: {currentUser.email}</p>
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-[10px] z-[1] mt-3 w-64 p-2 shadow">
+                                <p>User Name: {user.displayName}</p>
+                                <p>Email: {user.email}</p>
                             </ul>
                         </div>
                     )}
@@ -170,8 +163,8 @@ const Navbar = () => {
 
             {/* Dropdown for Small Devices */}
             <div
-                className={`fixed top-0 left-0 w-full transition-transform duration-300 ${isMenuOpen && window.innerWidth < 768 ? "translate-y-0" : "translate-y-[-100%]"
-                    } bg-white/95 text-black h-96 ${user ? 'p-16' : 'p-11'} md:hidden`}
+                className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${isMenuOpen && window.innerWidth < 768 ? "translate-y-0" : "translate-y-[-100%]"
+                    } bg-white/95 text-black p-14 ${user ? 'h-[22rem]' : 'h-44'} md:hidden`}
                 style={{ zIndex: 1000 }}
             >
                 {/* Close Button */}
@@ -190,7 +183,7 @@ const Navbar = () => {
 
             {/* Sidebar for Medium Devices */}
             <div
-                className={`fixed top-0 right-0 h-screen transition-transform duration-300 ${isMenuOpen && window.innerWidth >= 768 ? "translate-x-0" : "translate-x-full"
+                className={`fixed top-0 right-0 z-50 h-screen transition-transform duration-300 ${isMenuOpen && window.innerWidth >= 768 ? "translate-x-0" : "translate-x-full"
                     } bg-white/95 text-black w-72 hidden md:block lg:hidden`}
             >
                 {/* Close Button */}

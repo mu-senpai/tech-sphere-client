@@ -14,7 +14,6 @@ const UpdateBlog = () => {
 
     const { user, dataLoading, setDataLoading } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
-    const [currentUser, setCurrentUser] = useState({});
 
     const { id } = useParams();
     const [blogData, setBlogData] = useState({
@@ -29,20 +28,25 @@ const UpdateBlog = () => {
 
     useEffect(() => {
         setDataLoading(true);
-        
-        if (user) {
-            axiosSecure.get(`/users/${user.email}`).then((data) => setCurrentUser(data.data));
-        }
 
         if (id) {
             axios
                 .get(`https://tech-sphere-server.vercel.app/blogs/${id}`)
-                .then((response) => setBlogData(response.data))
+                .then((response) => {
+                    const blog = response.data;
+
+                    setBlogData({
+                        ...blog,
+                        longDescription: blog.longDescription
+                            ? blog.longDescription.join("\n")
+                            : "",
+                    });
+                })
                 .catch((error) => toast.error(error.code));
         }
 
         setDataLoading(false);
-    }, [id, user, axiosSecure]);
+    }, [id]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -52,13 +56,25 @@ const UpdateBlog = () => {
         }));
     };
 
+    const processBlogData = (data) => {
+        const processedData = {
+            ...data,
+            longDescription: data.longDescription
+                .split(/\n+/)
+                .filter((paragraph) => paragraph.trim() !== ""),
+        };
+        return processedData;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const processedBlogData = processBlogData(blogData);
+
         const updatedBlog = {
-            ...blogData,
-            name: currentUser?.name || "Anonymous",
-            email: currentUser?.email,
+            ...processedBlogData,
+            name: user?.displayName || "Anonymous",
+            email: user?.email,
         };
 
         axiosSecure
@@ -99,7 +115,7 @@ const UpdateBlog = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
             >
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-8 md:mb-10">
+                <h1 className="text-3xl lg:text-4xl font-bold text-center mb-6 sm:mb-8 md:mb-10">
                     Update Your <span className="text-blue-500">Blog</span>
                 </h1>
                 <form onSubmit={handleSubmit}>
@@ -108,7 +124,7 @@ const UpdateBlog = () => {
                             <label className="label text-gray-700">Name</label>
                             <input
                                 type="text"
-                                value={currentUser?.name || "Anonymous"}
+                                value={user?.displayName || "Anonymous"}
                                 readOnly
                                 className="input input-bordered w-full bg-gray-100"
                             />
@@ -117,7 +133,7 @@ const UpdateBlog = () => {
                             <label className="label text-gray-700">Email</label>
                             <input
                                 type="email"
-                                value={currentUser?.email || "Not Available"}
+                                value={user?.email || "Not Available"}
                                 readOnly
                                 className="input input-bordered w-full bg-gray-100"
                             />

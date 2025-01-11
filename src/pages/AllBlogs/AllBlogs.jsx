@@ -12,6 +12,7 @@ const AllBlogs = () => {
     const [blogs, setBlogs] = useState([]);
     const [category, setCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
+    const [sortBy, setSortBy] = useState("date-desc"); // Default sort: Newest first
     const { dataLoading, setDataLoading } = useContext(AuthContext);
 
     const categories = ["All", "Technology", "Programming", "AI", "Cybersecurity", "Web Development"];
@@ -21,6 +22,7 @@ const AllBlogs = () => {
             const params = {};
             if (category !== "All") params.category = category;
             if (searchQuery) params.search = searchQuery;
+            if (sortBy) params.sortBy = sortBy;
 
             const queryString = new URLSearchParams(params).toString();
             const url = `https://tech-sphere-server.vercel.app/blogs${queryString ? `?${queryString}` : ''}`;
@@ -36,7 +38,7 @@ const AllBlogs = () => {
         setDataLoading(true);
         fetchBlogs();
         setDataLoading(false);
-    }, [category, searchQuery]);
+    }, [category, searchQuery, sortBy]);
 
     if (dataLoading) {
         return <LoadingPage></LoadingPage>
@@ -99,9 +101,21 @@ const AllBlogs = () => {
                         </option>
                     ))}
                 </motion.select>
+
+                <motion.select
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="select select-bordered w-full lg:w-[30%] border-gray-300"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                >
+                    <option value="date-desc">Newest First</option>
+                    <option value="date-asc">Oldest First</option>
+                </motion.select>
             </div>
 
-            <div className="w-full space-y-6">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-6 sm:gap-4 md:gap-6">
                 {blogs.map((blog) => (
                     <BlogCard key={blog._id} blog={blog} />
                 ))}

@@ -36,7 +36,7 @@ const RecentBlogs = () => {
         </p>
       </motion.div>
 
-      <div className="w-full space-y-6">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-6 sm:gap-4 md:gap-6">
         {blogs.map((blog) => (
           <BlogCard key={blog._id} blog={blog} />
         ))}

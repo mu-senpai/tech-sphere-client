@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import Swal from "sweetalert2";
 import Lottie from "lottie-react";
 import { motion } from "framer-motion";
@@ -6,21 +6,10 @@ import blogAnimation from "../../assets/blogging.json";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../providers/AuthProvider";
-import LoadingPage from "../common/LoadingPage/LoadingPage";
 
 const AddBlog = () => {
-    const { user, dataLoading, setDataLoading } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
-    const [currentUser, setCurrentUser] = useState({});
-
-    useEffect(() => {
-        setDataLoading(true);
-        if (user) {
-            axiosSecure.get(`/users/${user.email}`)
-                .then(data => setCurrentUser(data.data));
-        }
-        setDataLoading(false);
-    }, [user])
 
     const [blogData, setBlogData] = useState({
         title: "",
@@ -40,13 +29,25 @@ const AddBlog = () => {
         }));
     };
 
+    const processBlogData = (data) => {
+        const processedData = {
+            ...data,
+            longDescription: data.longDescription
+                .split(/\n+/)
+                .filter((paragraph) => paragraph.trim() !== ""), // Convert into paragraphs here
+        };
+        return processedData;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const processedBlogData = processBlogData(blogData);
+
         const blogPost = {
-            ...blogData,
-            name: currentUser?.name || "Anonymous",
-            email: currentUser?.email,
+            ...processedBlogData,
+            name: user?.displayName || "Anonymous",
+            email: user?.email,
             date: new Date().toISOString(),
         };
 
@@ -74,19 +75,15 @@ const AddBlog = () => {
             });
     };
 
-    if (dataLoading) {
-        return <LoadingPage></LoadingPage>
-    }
-
     return (
         <div
-            className="min-h-screen 2xl:min-h-[60rem] grid grid-cols-1 md:grid-cols-2 gap-6 items-center w-[90%] mx-auto p-4 md:p-8 bg-white my-10 sm:my-16 lg:my-20 2xl:my-28">
+            className="min-h-screen 2xl:min-h-[60rem] grid grid-cols-1 lg:grid-cols-2 gap-6 items-center w-[90%] mx-auto p-4 md:p-8 bg-white my-10 sm:my-16 lg:my-20 2xl:my-28">
 
             <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                className="hidden md:block">
+                className="hidden lg:block">
                 <Lottie animationData={blogAnimation} loop={true} />
             </motion.div>
 
@@ -95,7 +92,7 @@ const AddBlog = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
             >
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-8 md:mb-10">Add a New <span className="text-blue-500">Blog</span></h1>
+                <h1 className="text-3xl lg:text-4xl font-bold text-center mb-6 sm:mb-8 md:mb-10">Add a New <span className="text-blue-500">Blog</span></h1>
                 <form onSubmit={handleSubmit}>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -103,7 +100,7 @@ const AddBlog = () => {
                             <label className="label text-gray-700">Name</label>
                             <input
                                 type="text"
-                                value={currentUser?.name || "Anonymous"}
+                                value={user?.displayName || "Anonymous"}
                                 readOnly
                                 className="input input-bordered w-full bg-gray-100"
                             />
@@ -112,7 +109,7 @@ const AddBlog = () => {
                             <label className="label text-gray-700">Email</label>
                             <input
                                 type="email"
-                                value={currentUser?.email || "Not Available"}
+                                value={user?.email || "Not Available"}
                                 readOnly
                                 className="input input-bordered w-full bg-gray-100"
                             />
