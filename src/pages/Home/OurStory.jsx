@@ -33,7 +33,7 @@ const OurStory = () => {
       
 
     return (
-        <section className="w-[90%] lg:w-[85%] mx-auto bg-white py-10">
+        <section className="w-[90%] lg:w-[85%] mx-auto py-10">
 
             <motion.div
                 initial={{ opacity: 0, y: -30 }}
@@ -42,7 +42,7 @@ const OurStory = () => {
                 className="text-center mb-10"
             >
                 <h2 className="text-3xl lg:text-4xl font-bold text-center text-blue-500 mb-4 lg:mb-6">Our Journey</h2>
-                <p className="text-sm sm:text-base lg:text-lg text-center text-gray-600 mb-6 lg:mb-8">
+                <p className="text-sm sm:text-base lg:text-lg text-center mb-6 lg:mb-8">
                     Explore the milestones that shaped TechSphere into a leading platform for IT bloggers and readers.
                 </p>
             </motion.div>
@@ -53,8 +53,8 @@ const OurStory = () => {
                         key={index}
                         className="vertical-timeline-element--work"
                         date={event.date}
-                        contentStyle={{ background: "#ffffff", color: "#1f2937" }} // White background and Tailwind gray-800 text
-                        contentArrowStyle={{ borderRight: "7px solid #ffffff" }}
+                        contentStyle={{ background: "var(--tw-bg-opacity) bg-base-100", border: "2px solid #d2d2d3" }} // White background and Tailwind gray-800 text
+                        contentArrowStyle={{ borderRight: "7px solid #d2d2d3" }}
                         iconStyle={{ background: event.iconBg, color: "#ffffff" }}
                         icon={event.icon}
                     >
@@ -67,7 +67,7 @@ const OurStory = () => {
                             <h3 className="vertical-timeline-element-title text-lg font-bold">
                                 {event.title}
                             </h3>
-                            <p className="mt-2 text-gray-700">{event.description}</p>
+                            <p className="mt-2">{event.description}</p>
                         </motion.div>
                     </VerticalTimelineElement>
                 ))}

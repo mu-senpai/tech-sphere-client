@@ -73,7 +73,7 @@ export default function TestimonialsCarousel() {
                 <h2 className="text-3xl lg:text-4xl font-bold text-center text-blue-500 mb-4 lg:mb-6">
                     Testimonials
                 </h2>
-                <p className="text-sm sm:text-base lg:text-lg text-center text-gray-600 mb-6 lg:mb-8">
+                <p className="text-sm sm:text-base lg:text-lg text-center mb-6 lg:mb-8">
                     What our readers say about TechSphere
                 </p>
             </motion.div>
@@ -88,19 +88,19 @@ export default function TestimonialsCarousel() {
                         transition={{ duration: 0.5 }}
                         className="flex justify-center items-center"
                     >
-                        <div className="flex flex-col h-80 items-center justify-center text-center bg-white p-6">
+                        <div className="flex flex-col h-80 items-center justify-center text-center p-6">
                             <img
                                 src={Testimonials[currentIndex].img}
                                 alt={Testimonials[currentIndex].name}
                                 className="w-16 h-16 object-cover rounded-full mb-4"
                             />
-                            <p className="text-gray-700 italic mb-4">
+                            <p className="text-slate-400 italic mb-4">
                                 "{Testimonials[currentIndex].message}"
                             </p>
                             <h3 className="font-bold text-lg text-blue-500">
                                 {Testimonials[currentIndex].name}
                             </h3>
-                            <p className="text-gray-500">{Testimonials[currentIndex].role}</p>
+                            <p className="text-slate-400">{Testimonials[currentIndex].role}</p>
                         </div>
                     </motion.div>
                 </div>

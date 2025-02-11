@@ -4,7 +4,7 @@ import heroLottie from "../../assets/hero-animation.json";
 
 const HeroSection = () => {
   return (
-    <div className="w-[85%] mx-auto text-gray-800 flex flex-col lg:flex-row items-center justify-between mt-5 sm:mt-0 md:mt-8 sm:my-8 md:my-0 lg:my-10 2xl:my-12">
+    <div className="w-[85%] mx-auto flex flex-col lg:flex-row items-center justify-between mt-5 sm:mt-0 md:mt-8 sm:my-8 md:my-0 lg:my-10 2xl:my-12">
       {/* Left Side Content */}
       <motion.div
         initial={{ opacity: 0, x: -30 }}
@@ -19,7 +19,7 @@ const HeroSection = () => {
           Discover the latest trends, tips, and tools in information technology. Your ultimate guide to staying ahead in the tech world.
         </p>
         {/* Static Useful Content */}
-        <div className="mt-6 text-gray-600 text-left text-xs/normal xl:text-sm/normal 2xl:text-base/normal space-y-2">
+        <div className="mt-6 text-left text-xs/normal xl:text-sm/normal 2xl:text-base/normal space-y-2">
           <p>✔ Stay informed about the latest advancements in IT.</p>
           <p>✔ Learn from expert tips and tutorials tailored for you.</p>
           <p>✔ Explore cutting-edge tools and software solutions.</p>

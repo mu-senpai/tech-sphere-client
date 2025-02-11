@@ -31,7 +31,7 @@ const RecentBlogs = () => {
         <h2 className="text-3xl lg:text-4xl font-bold text-center text-blue-500 mb-4 lg:mb-6">
           Our Recent Blogs
         </h2>
-        <p className="text-sm sm:text-base lg:text-lg text-center text-gray-600 mb-6 sm:mb-8 lg:mb-10 xl:mb-12">
+        <p className="text-sm sm:text-base lg:text-lg text-center mb-6 sm:mb-8 lg:mb-10 xl:mb-12">
           Stay updated with our latest articles and insights.
         </p>
       </motion.div>

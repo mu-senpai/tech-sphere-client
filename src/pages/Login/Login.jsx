@@ -77,10 +77,10 @@ const Login = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, ease: easeInOut }}
-                className="card w-full lg:w-[45&] xl:w-[40%] bg-white p-8">
+                className="card w-full lg:w-[45&] xl:w-[40%] p-8">
                 {/* Title */}
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-2">Member <span className="text-blue-500">Login</span></h2>
-                <p className="text-gray-500 text-sm text-center mb-4">Access to all features. No credit card required.</p>
+                <p className="text-sm text-center mb-4">Access to all features. No credit card required.</p>
 
                 {/* Google Signup */}
                 <button onClick={handleLoginWithGoogle} className="btn btn-ghost border-2 border-[#05264e] hover:bg-[#05264e] hover:text-white w-full mb-4 flex items-center justify-center">
@@ -88,21 +88,21 @@ const Login = () => {
                 </button>
 
                 <div className="flex items-center justify-center mb-4">
-                    <hr className="flex-grow border-gray-300" />
-                    <span className="text-gray-500 mx-2">Or continue with</span>
-                    <hr className="flex-grow border-gray-300" />
+                    <hr className="flex-grow border-slate-300" />
+                    <span className="mx-2">Or continue with</span>
+                    <hr className="flex-grow border-slate-300" />
                 </div>
 
                 {/* Form Fields */}
                 <form onSubmit={handleLogin}>
 
                     <div className="form-control mb-4">
-                        <label className="label text-gray-700">Email</label>
+                        <label className="label">Email</label>
                         <input type="email" placeholder="stevenjob@gmail.com" name="email" className="input input-bordered w-full" required />
                     </div>
 
                     <div className="form-control mb-4">
-                        <label className="label text-gray-700">Password</label>
+                        <label className="label">Password</label>
                         <input type="password" placeholder="********" name="password" className="input input-bordered w-full" required />
                     </div>
 

@@ -27,7 +27,7 @@ const Footer = () => {
 
     return (
         <section className="border-t border-gray-200">
-            <footer className="footer bg-white text-gray-600 p-8 sm:p-10 lg:p-12">
+            <footer className="footer text-slate-400 p-8 sm:p-10 lg:p-12">
                 <aside>
                     <Link
                         to="/"
@@ -94,7 +94,7 @@ const Footer = () => {
                     </div>
                 </nav>
             </footer>
-            <footer className="footer footer-center bg-white text-gray-600 pb-6 sm:pb-8 px-8 sm:px-10 lg:px-12">
+            <footer className="footer footer-center text-slate-400 pb-6 sm:pb-8 px-8 sm:px-10 lg:px-12">
                 <aside>
                     <p>© {new Date().getFullYear()} - All right reserved by TechSphere Ltd</p>
                 </aside>

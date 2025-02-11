@@ -96,16 +96,16 @@ const BlogCard = (props = {}) => {
                         </span>
                     </div>
 
-                    <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 sm:flex-grow md:flex-grow-0">
+                    <h2 className="text-xl md:text-2xl lg:text-3xl font-bold sm:flex-grow md:flex-grow-0">
                         {blog.title}
                     </h2>
 
-                    <p className="text-sm md:text-base lg:text-lg text-gray-600 my-3 sm:my-1 md:my-3 line-clamp-3 flex-grow">
+                    <p className="text-sm md:text-base lg:text-lg text-slate-400 my-3 sm:my-1 md:my-3 line-clamp-3 flex-grow">
                         {blog.shortDescription}
                     </p>
 
                     <div className="mt-4 flex flex-row justify-between items-center sm:items-center gap-4">
-                        <div className="text-sm sm:text-xs md:text-base text-gray-500">
+                        <div className="text-sm sm:text-xs md:text-base text-slate-400">
                             <span>{formattedDate}</span>
                         </div>
 

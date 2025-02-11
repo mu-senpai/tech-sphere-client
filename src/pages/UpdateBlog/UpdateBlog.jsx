@@ -100,7 +100,7 @@ const UpdateBlog = () => {
 
     return (
         <div
-            className="min-h-screen 2xl:min-h-[60rem] grid grid-cols-1 md:grid-cols-2 gap-6 items-center w-[90%] mx-auto p-4 md:p-8 bg-white my-10 sm:my-16 lg:my-20 2xl:my-28"
+            className="min-h-screen 2xl:min-h-[60rem] grid grid-cols-1 md:grid-cols-2 gap-6 items-center w-[90%] mx-auto p-4 md:p-8 my-10 sm:my-16 lg:my-20 2xl:my-28"
         >
             <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -121,27 +121,27 @@ const UpdateBlog = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                         <div className="form-control">
-                            <label className="label text-gray-700">Name</label>
+                            <label className="label">Name</label>
                             <input
                                 type="text"
                                 value={user?.displayName || "Anonymous"}
                                 readOnly
-                                className="input input-bordered w-full bg-gray-100"
+                                className="input input-bordered w-full"
                             />
                         </div>
                         <div className="form-control">
-                            <label className="label text-gray-700">Email</label>
+                            <label className="label">Email</label>
                             <input
                                 type="email"
                                 value={user?.email || "Not Available"}
                                 readOnly
-                                className="input input-bordered w-full bg-gray-100"
+                                className="input input-bordered w-full"
                             />
                         </div>
                     </div>
 
                     <div className="form-control mb-4">
-                        <label className="label text-gray-700">Title</label>
+                        <label className="label">Title</label>
                         <input
                             type="text"
                             name="title"
@@ -153,7 +153,7 @@ const UpdateBlog = () => {
                         />
                     </div>
                     <div className="form-control mb-4">
-                        <label className="label text-gray-700">Image URL</label>
+                        <label className="label">Image URL</label>
                         <input
                             type="url"
                             name="imageUrl"
@@ -165,7 +165,7 @@ const UpdateBlog = () => {
                         />
                     </div>
                     <div className="form-control mb-4">
-                        <label className="label text-gray-700">Category</label>
+                        <label className="label">Category</label>
                         <select
                             name="category"
                             value={blogData.category}
@@ -184,7 +184,7 @@ const UpdateBlog = () => {
                         </select>
                     </div>
                     <div className="form-control mb-4">
-                        <label className="label text-gray-700">Short Description</label>
+                        <label className="label">Short Description</label>
                         <textarea
                             name="shortDescription"
                             value={blogData.shortDescription}
@@ -195,7 +195,7 @@ const UpdateBlog = () => {
                         ></textarea>
                     </div>
                     <div className="form-control mb-6">
-                        <label className="label text-gray-700">Long Description</label>
+                        <label className="label">Long Description</label>
                         <textarea
                             name="longDescription"
                             value={blogData.longDescription}

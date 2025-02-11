@@ -73,7 +73,7 @@ const Wishlist = () => {
                     <h2 className="text-3xl lg:text-4xl font-bold text-blue-500 mb-4">
                         Wishlisted Blogs
                     </h2>
-                    <p className="text-sm sm:text-base lg:text-lg text-gray-600">
+                    <p className="text-sm sm:text-base lg:text-lg">
                         Explore your saved blogs, curated for easy access and personalized learning journeys.
                     </p>
                 </motion.div>
@@ -116,7 +116,7 @@ const Wishlist = () => {
                                 <td>{blog.category}</td>
                                 <td className="flex items-center gap-3">
                                     <Link to={`/blog/${blog.blogId}`} className="btn btn-sm bg-blue-500 hover:bg-blue-600 border-none text-white"><FaEye></FaEye></Link>
-                                    <button onClick={() => handleDelete(blog._id)} className="btn btn-sm btn-ghost border border-gray-600 text-gray-600 hover:bg-blue-600 hover:text-white hover:border-none"><FaTrash></FaTrash></button>
+                                    <button onClick={() => handleDelete(blog._id)} className="btn btn-sm btn-ghost border border-slate-400 text-slate-400 hover:bg-blue-600 hover:text-white hover:border-none"><FaTrash></FaTrash></button>
                                 </td>
                             </motion.tr>
                             )

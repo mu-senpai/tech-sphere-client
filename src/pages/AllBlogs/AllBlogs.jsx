@@ -58,7 +58,7 @@ const AllBlogs = () => {
                     <h2 className="text-3xl lg:text-4xl font-bold text-blue-500 mb-4">
                         Explore All Blogs
                     </h2>
-                    <p className="text-sm sm:text-base lg:text-lg text-gray-600">
+                    <p className="text-sm sm:text-base lg:text-lg">
                         Discover a world of knowledge with our curated collection of blogs
                         across multiple topics.
                     </p>

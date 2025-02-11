@@ -94,7 +94,7 @@ const FeaturedBlogs = () => {
                     <h2 className="text-3xl lg:text-4xl font-bold text-blue-500 mb-4">
                         Featured Blogs
                     </h2>
-                    <p className="text-sm sm:text-base lg:text-lg text-gray-600">
+                    <p className="text-sm sm:text-base lg:text-lg">
                         Explore our top 10 blogs based on word count with insightful content, curated for your learning journey.
                     </p>
                 </motion.div>

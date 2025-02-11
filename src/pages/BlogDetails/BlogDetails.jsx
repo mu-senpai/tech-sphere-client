@@ -64,8 +64,8 @@ const BlogDetails = () => {
             <h1 className="text-2xl sm:text-3xl xl:text-4xl text-blue-500 font-bold mb-4">{blog.title}</h1>
             <div className="flex items-center">
                 <div>
-                    <p className="text-base sm:text-lg xl:text-xl text-gray-700 font-semibold">{blog.name}</p>
-                    <p className="text-sm text-gray-600">{formattedDate}</p>
+                    <p className="text-base sm:text-lg xl:text-xl font-semibold">{blog.name}</p>
+                    <p className="text-sm text-slate-400">{formattedDate}</p>
                 </div>
             </div>
             <img
@@ -74,7 +74,7 @@ const BlogDetails = () => {
                 className="w-full h-[20rem] sm:h-[25rem] xl:h-[35rem] object-cover rounded-md my-8 sm:my-10"
             />
             {/* <p className="text-sm sm:text-base xl:text-lg my-8 sm:my-10 text-gray-600">{blog.longDescription}</p> */}
-            <p className="text-sm sm:text-base xl:text-lg my-8 sm:my-10 text-gray-600">
+            <p className="text-sm sm:text-base xl:text-lg my-8 sm:my-10">
                 {blog.longDescription.map((paragraph, index) => (
                     <p key={index} style={{ marginBottom: '1rem' }}>
                         {paragraph}
@@ -106,7 +106,7 @@ const BlogDetails = () => {
                 </div>
             )}
 
-            <h2 className="text-lg sm:text-xl xl:text-2xl font-bold text-gray-700 my-4 sm:my-6 xl:my-8">Comments ({comments.length})</h2>
+            <h2 className="text-lg sm:text-xl xl:text-2xl font-bold my-4 sm:my-6 xl:my-8">Comments ({comments.length})</h2>
             <div className="space-y-4">
                 {comments.map((comment, idx) => (
                     <div key={idx} className="flex items-start space-x-4">
@@ -116,8 +116,8 @@ const BlogDetails = () => {
                             className="w-8 sm:w-10 xl:w-14 h-8 sm:h-10 xl:h-14 rounded-full"
                         />
                         <div>
-                            <p className="text-sm sm:text-base xl:text-lg font-semibold text-gray-600">{comment.userName}</p>
-                            <p className="text-sm sm:text-base xl:text-lg text-gray-600">{comment.text}</p>
+                            <p className="text-base sm:text-lg xl:text-xl font-bold">{comment.userName}</p>
+                            <p className="text-sm sm:text-base xl:text-lg">{comment.text}</p>
                         </div>
                     </div>
                 ))}
