@@ -238,12 +238,12 @@ const Navbar = () => {
             {/* Dropdown for Small Devices */}
             <div
                 className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${isMenuOpen && window.innerWidth < 768 ? "translate-y-0" : "translate-y-[-100%]"
-                    } bg-white/95 text-black p-14 ${user ? 'h-[22rem]' : 'h-80'} md:hidden`}
+                    } bg-base-100/95 ${isDarkMode ? 'text-[#a6adbb]' : 'text-black'} p-14 ${user ? 'h-[22rem]' : 'h-80'} md:hidden`}
                 style={{ zIndex: 1000 }}
             >
                 {/* Close Button */}
                 <button
-                    className="absolute top-4 right-6 text-2xl bg-gray-200 px-4 py-2 rounded-full hover:bg-gray-300"
+                    className={`absolute top-4 right-6 text-2xl ${isDarkMode ? 'bg-gray-600 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'} px-4 py-2 rounded-full`}
                     onClick={() => setIsMenuOpen(false)}
                 >
                     ✕
@@ -258,11 +258,11 @@ const Navbar = () => {
             {/* Sidebar for Medium Devices */}
             <div
                 className={`fixed top-0 right-0 z-50 h-screen transition-transform duration-300 ${isMenuOpen && window.innerWidth >= 768 ? "translate-x-0" : "translate-x-full"
-                    } bg-white/95 text-black w-72 hidden md:block lg:hidden`}
+                    } bg-base-100/95 ${isDarkMode ? 'text-[#a6adbb]' : 'text-black'} w-72 hidden md:block lg:hidden`}
             >
                 {/* Close Button */}
                 <button
-                    className="absolute top-4 right-6 text-2xl bg-gray-200 px-4 py-2 rounded-full hover:bg-gray-300"
+                    className={`absolute top-4 right-6 text-2xl ${isDarkMode ? 'bg-gray-600 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'} px-4 py-2 rounded-full`}
                     onClick={() => setIsMenuOpen(false)}
                 >
                     ✕
